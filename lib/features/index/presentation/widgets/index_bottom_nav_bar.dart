@@ -1,245 +1,513 @@
-// import 'dart:ui';
+import 'dart:ui';
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:stock_control_master/core/theme/app_theme_colors.dart';
 
-// import 'package:stock_control_master/core/theme/app_theme_colors.dart';
-// import 'package:stock_control_master/shared/widgets/atoms/glass_nav_item.dart';
-// import 'package:stock_control_master/shared/widgets/atoms/glass_nav_item_data.dart';
+class IndexBottomNavBar extends StatelessWidget {
+  const IndexBottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
-// class IndexBottomNavBar extends StatelessWidget {
-//   const IndexBottomNavBar({
-//     super.key,
-//     required this.currentIndex,
-//     required this.onTap,
-//     required this.messageCount,
-//     required this.pendingTimesheetCount,
-//   });
+  final int currentIndex;
+  final ValueChanged<int> onTap;
 
-//   final int currentIndex;
-//   final int messageCount;
-//   final int pendingTimesheetCount;
-//   final ValueChanged<int> onTap;
+  static const List<_NavItemData> _items = [
+    _NavItemData(
+      label: 'Home',
+      materialIcon: Icons.home_outlined,
+      materialSelectedIcon: Icons.home_rounded,
+      cupertinoIcon: CupertinoIcons.house,
+      cupertinoSelectedIcon: CupertinoIcons.house_fill,
+    ),
+    _NavItemData(
+      label: 'Inventory',
+      materialIcon: Icons.inventory_2_outlined,
+      materialSelectedIcon: Icons.inventory_2_rounded,
+      cupertinoIcon: CupertinoIcons.cube_box,
+      cupertinoSelectedIcon: CupertinoIcons.cube_box_fill,
+    ),
+    _NavItemData(
+      label: 'Stock',
+      materialIcon: Icons.inventory_outlined,
+      materialSelectedIcon: Icons.inventory_rounded,
+      cupertinoIcon: CupertinoIcons.square_list,
+      cupertinoSelectedIcon: CupertinoIcons.square_list_fill,
+    ),
+    _NavItemData(
+      label: 'Reports',
+      materialIcon: Icons.bar_chart_outlined,
+      materialSelectedIcon: Icons.bar_chart_rounded,
+      cupertinoIcon: CupertinoIcons.chart_bar,
+      cupertinoSelectedIcon: CupertinoIcons.chart_bar_fill,
+    ),
+    _NavItemData(
+      label: 'Account',
+      materialIcon: Icons.person_outline_rounded,
+      materialSelectedIcon: Icons.person_rounded,
+      cupertinoIcon: CupertinoIcons.person,
+      cupertinoSelectedIcon: CupertinoIcons.person_fill,
+    ),
+  ];
 
-//   static const Duration _indicatorDuration = Duration(milliseconds: 360);
+  int get _safeIndex {
+    if (currentIndex < 0) {
+      return 0;
+    }
 
-//   static const Curve _indicatorCurve = Curves.easeOutCubic;
+    if (currentIndex >= _items.length) {
+      return _items.length - 1;
+    }
 
-//   static const List<NavItemData> _items = [
-//     NavItemData(label: 'Home', icon: Icons.home_rounded),
-//     NavItemData(label: 'Messaging', icon: Icons.chat_bubble_rounded),
-//     NavItemData(label: 'Schedule', icon: Icons.calendar_month_rounded),
-//     NavItemData(label: 'Timesheets', icon: Icons.access_time_filled_rounded),
-//     NavItemData(label: 'People', icon: Icons.badge_rounded),
-//   ];
+    return currentIndex;
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-//     final colors = theme.extension<AppThemeColors>()!;
-//     final isDark = theme.brightness == Brightness.dark;
+  @override
+  Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
 
-//     final bottomSafeArea = MediaQuery.paddingOf(context).bottom;
+    if (platform == TargetPlatform.iOS) {
+      return _IOSFloatingGlassNavigationBar(
+        currentIndex: _safeIndex,
+        items: _items,
+        onTap: onTap,
+      );
+    }
 
-//     return Padding(
-//       padding: EdgeInsets.only(
-//         left: 12.w,
-//         right: 12.w,
-//         bottom: bottomSafeArea > 0 ? 8.h : 14.h,
-//       ),
-//       child: _NavigationShadow(
-//         isDark: isDark,
-//         selectedColor: colors.selectedItem,
-//         child: ClipRRect(
-//           borderRadius: BorderRadius.circular(32.r),
-//           child: BackdropFilter(
-//             filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
-//             child: Container(
-//               height: 72.h,
-//               decoration: _buildBarDecoration(context, colors, isDark),
-//               child: Padding(
-//                 padding: EdgeInsets.all(5.w),
-//                 child: LayoutBuilder(
-//                   builder: (context, constraints) {
-//                     final itemWidth = constraints.maxWidth / _items.length;
+    return _AndroidBottomNavigationBar(
+      currentIndex: _safeIndex,
+      items: _items,
+      onTap: onTap,
+    );
+  }
+}
 
-//                     return Stack(
-//                       fit: StackFit.expand,
-//                       children: [
-//                         _buildSelectionIndicator(
-//                           context: context,
-//                           itemWidth: itemWidth,
-//                           colors: colors,
-//                           isDark: isDark,
-//                         ),
+// ============================================================================
+// ANDROID NAVIGATION
+// ============================================================================
 
-//                         Row(
-//                           children: List.generate(_items.length, (index) {
-//                             return SizedBox(
-//                               width: itemWidth,
-//                               child: GlassNavItem(
-//                                 data: _items[index],
-//                                 isSelected: index == currentIndex,
-//                                 selectedColor: colors.selectedItem,
-//                                 unselectedColor: colors.unselectedItem,
-//                                 messageCount: messageCount,
-//                                 pendingTimesheetCount: pendingTimesheetCount,
-//                                 onTap: () => onTap(index),
-//                               ),
-//                             );
-//                           }),
-//                         ),
-//                       ],
-//                     );
-//                   },
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
+class _AndroidBottomNavigationBar extends StatelessWidget {
+  const _AndroidBottomNavigationBar({
+    required this.currentIndex,
+    required this.items,
+    required this.onTap,
+  });
 
-//   Widget _buildSelectionIndicator({
-//     required BuildContext context,
-//     required double itemWidth,
-//     required AppThemeColors colors,
-//     required bool isDark,
-//   }) {
-//     return AnimatedPositioned(
-//       duration: _indicatorDuration,
-//       curve: _indicatorCurve,
-//       left: currentIndex * itemWidth,
-//       top: 0,
-//       bottom: 0,
-//       width: itemWidth,
-//       child: Padding(
-//         padding: EdgeInsets.symmetric(horizontal: 2.w),
-//         child: IgnorePointer(
-//           child: Container(
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(27.r),
+  final int currentIndex;
+  final List<_NavItemData> items;
+  final ValueChanged<int> onTap;
 
-//               // Translucent on purpose.
-//               // BackdropFilter cannot look like glass if
-//               // the surface placed above it is fully opaque.
-//               gradient: LinearGradient(
-//                 begin: Alignment.topLeft,
-//                 end: Alignment.bottomRight,
-//                 colors: isDark
-//                     ? [
-//                         Colors.white.withValues(alpha: 0.12),
-//                         colors.selectedItem.withValues(alpha: 0.10),
-//                         Colors.white.withValues(alpha: 0.055),
-//                       ]
-//                     : [
-//                         Colors.white.withValues(alpha: 0.72),
-//                         colors.selectedItem.withValues(alpha: 0.065),
-//                         Colors.white.withValues(alpha: 0.46),
-//                       ],
-//               ),
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appColors = theme.extension<AppThemeColors>()!;
 
-//               border: Border.all(
-//                 color: isDark
-//                     ? Colors.white.withValues(alpha: 0.12)
-//                     : Colors.white.withValues(alpha: 0.85),
-//                 width: 0.8,
-//               ),
+    return NavigationBar(
+      selectedIndex: currentIndex,
+      onDestinationSelected: onTap,
+      backgroundColor: appColors.navBackground,
+      indicatorColor: appColors.selectedItem.withValues(alpha: 0.14),
+      destinations: items.map((item) {
+        return NavigationDestination(
+          icon: Icon(item.materialIcon, color: appColors.unselectedItem),
+          selectedIcon: Icon(
+            item.materialSelectedIcon,
+            color: appColors.selectedItem,
+          ),
+          label: item.label,
+        );
+      }).toList(),
+    );
+  }
+}
 
-//               boxShadow: [
-//                 BoxShadow(
-//                   color: colors.selectedItem.withValues(
-//                     alpha: isDark ? 0.08 : 0.07,
-//                   ),
-//                   blurRadius: 15.r,
-//                   spreadRadius: 0,
-//                   offset: Offset(0, 3.h),
-//                 ),
-//                 BoxShadow(
-//                   color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.045),
-//                   blurRadius: 9.r,
-//                   offset: Offset(0, 4.h),
-//                 ),
-//               ],
-//             ),
+// ============================================================================
+// IOS FLOATING GLASS NAVIGATION
+// ============================================================================
 
-//             // Very subtle top glass reflection.
-//             child: Align(
-//               alignment: Alignment.topCenter,
-//               child: Container(
-//                 height: 1.h,
-//                 margin: EdgeInsets.symmetric(horizontal: 15.w),
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(100),
-//                   color: Colors.white.withValues(alpha: isDark ? 0.16 : 0.75),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
+class _IOSFloatingGlassNavigationBar extends StatelessWidget {
+  const _IOSFloatingGlassNavigationBar({
+    required this.currentIndex,
+    required this.items,
+    required this.onTap,
+  });
 
-//   BoxDecoration _buildBarDecoration(
-//     BuildContext context,
-//     AppThemeColors colors,
-//     bool isDark,
-//   ) {
-//     return BoxDecoration(
-//       borderRadius: BorderRadius.circular(32.r),
+  final int currentIndex;
+  final List<_NavItemData> items;
+  final ValueChanged<int> onTap;
 
-//       // Keep this translucent.
-//       color: isDark
-//           ? colors.navBackground.withValues(alpha: 0.72)
-//           : colors.navBackground.withValues(alpha: 0.70),
+  static const double _barHeight = 64;
+  static const double _horizontalMargin = 14;
+  static const double _bottomSpacing = 6;
 
-//       border: Border.all(
-//         color: isDark
-//             ? colors.navBorder.withValues(alpha: 0.40)
-//             : Colors.white.withValues(alpha: 0.72),
-//         width: 0.8,
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appColors = theme.extension<AppThemeColors>()!;
+    final isDark = theme.brightness == Brightness.dark;
 
-// class _NavigationShadow extends StatelessWidget {
-//   const _NavigationShadow({
-//     required this.child,
-//     required this.isDark,
-//     required this.selectedColor,
-//   });
+    final bottomSafeArea = MediaQuery.paddingOf(context).bottom;
 
-//   final Widget child;
-//   final bool isDark;
-//   final Color selectedColor;
+    return SizedBox(
+      // This is the important fix.
+      //
+      // The bottom navigation can no longer expand vertically
+      // across the whole iPhone / iPad screen.
+      height: _barHeight + bottomSafeArea + _bottomSpacing,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: _horizontalMargin,
+          right: _horizontalMargin,
+          bottom: bottomSafeArea + _bottomSpacing,
+        ),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: ConstrainedBox(
+            // Keeps navigation compact on iPad.
+            constraints: const BoxConstraints(maxWidth: 560),
+            child: SizedBox(
+              height: _barHeight,
+              child: _IOSGlassContainer(
+                appColors: appColors,
+                isDark: isDark,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    _IOSAnimatedSelection(
+                      currentIndex: currentIndex,
+                      itemCount: items.length,
+                      appColors: appColors,
+                      isDark: isDark,
+                    ),
+                    Row(
+                      children: List.generate(items.length, (index) {
+                        return Expanded(
+                          child: _IOSNavigationItem(
+                            item: items[index],
+                            selected: index == currentIndex,
+                            selectedColor: appColors.selectedItem,
+                            unselectedColor: appColors.unselectedItem,
+                            onTap: () {
+                              if (index == currentIndex) {
+                                return;
+                              }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(32.r),
-//         boxShadow: [
-//           // Main floating shadow
-//           BoxShadow(
-//             color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.09),
-//             blurRadius: 26.r,
-//             spreadRadius: -4.r,
-//             offset: Offset(0, 10.h),
-//           ),
+                              HapticFeedback.selectionClick();
 
-//           // Very subtle theme-colored ambient shadow
-//           BoxShadow(
-//             color: selectedColor.withValues(alpha: isDark ? 0.06 : 0.035),
-//             blurRadius: 20.r,
-//             spreadRadius: -5.r,
-//             offset: Offset(0, 3.h),
-//           ),
-//         ],
-//       ),
-//       child: child,
-//     );
-//   }
-// }
+                              onTap(index);
+                            },
+                          ),
+                        );
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// GLASS BACKGROUND
+// ============================================================================
+
+class _IOSGlassContainer extends StatelessWidget {
+  const _IOSGlassContainer({
+    required this.child,
+    required this.appColors,
+    required this.isDark,
+  });
+
+  final Widget child;
+  final AppThemeColors appColors;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    final glassBase = Color.lerp(
+      appColors.navBackground,
+      theme.colorScheme.surface,
+      isDark ? 0.20 : 0.45,
+    )!;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(34),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.28 : 0.10),
+            blurRadius: 28,
+            spreadRadius: -6,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(34),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 26, sigmaY: 26),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(34),
+              color: glassBase.withValues(alpha: isDark ? 0.44 : 0.36),
+              border: Border.all(
+                color: appColors.navBorder.withValues(
+                  alpha: isDark ? 0.42 : 0.58,
+                ),
+                width: 0.7,
+              ),
+            ),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                IgnorePointer(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(34),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.white.withValues(alpha: isDark ? 0.10 : 0.28),
+                          Colors.white.withValues(alpha: 0.02),
+                          Colors.black.withValues(alpha: isDark ? 0.08 : 0.015),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                child,
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// MOVING SELECTED GLASS CAPSULE
+// ============================================================================
+
+class _IOSAnimatedSelection extends StatelessWidget {
+  const _IOSAnimatedSelection({
+    required this.currentIndex,
+    required this.itemCount,
+    required this.appColors,
+    required this.isDark,
+  });
+
+  final int currentIndex;
+  final int itemCount;
+  final AppThemeColors appColors;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final alignmentX = _calculateAlignment();
+
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: AnimatedAlign(
+        duration: const Duration(milliseconds: 420),
+        curve: Curves.easeOutBack,
+        alignment: Alignment(alignmentX, 0),
+        child: FractionallySizedBox(
+          widthFactor: 1 / itemCount,
+          heightFactor: 1,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            child: _IOSSelectionCapsule(appColors: appColors, isDark: isDark),
+          ),
+        ),
+      ),
+    );
+  }
+
+  double _calculateAlignment() {
+    if (itemCount <= 1) {
+      return 0;
+    }
+
+    return -1 + ((2 * currentIndex) / (itemCount - 1));
+  }
+}
+
+class _IOSSelectionCapsule extends StatelessWidget {
+  const _IOSSelectionCapsule({required this.appColors, required this.isDark});
+
+  final AppThemeColors appColors;
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final surface = theme.colorScheme.surface;
+
+    final topColor = Color.lerp(
+      appColors.navBackground,
+      surface,
+      isDark ? 0.35 : 0.75,
+    )!;
+
+    final bottomColor = Color.lerp(
+      appColors.navBackground,
+      appColors.selectedItem,
+      isDark ? 0.08 : 0.05,
+    )!;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(28),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(28),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                topColor.withValues(alpha: isDark ? 0.40 : 0.58),
+                bottomColor.withValues(alpha: isDark ? 0.30 : 0.42),
+              ],
+            ),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: isDark ? 0.13 : 0.42),
+              width: 0.7,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: isDark ? 0.20 : 0.06),
+                blurRadius: 12,
+                offset: const Offset(0, 5),
+              ),
+              BoxShadow(
+                color: appColors.selectedItem.withValues(alpha: 0.07),
+                blurRadius: 14,
+                spreadRadius: -5,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// IOS NAVIGATION ITEM
+// ============================================================================
+
+class _IOSNavigationItem extends StatelessWidget {
+  const _IOSNavigationItem({
+    required this.item,
+    required this.selected,
+    required this.selectedColor,
+    required this.unselectedColor,
+    required this.onTap,
+  });
+
+  final _NavItemData item;
+
+  final bool selected;
+
+  final Color selectedColor;
+  final Color unselectedColor;
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = selected ? selectedColor : unselectedColor;
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: Center(
+        child: AnimatedSlide(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutBack,
+          offset: selected ? const Offset(0, -0.025) : Offset.zero,
+          child: AnimatedScale(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOutBack,
+            scale: selected ? 1.05 : 1,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 220),
+                  switchInCurve: Curves.easeOutBack,
+                  switchOutCurve: Curves.easeIn,
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: ScaleTransition(scale: animation, child: child),
+                    );
+                  },
+                  child: Icon(
+                    selected ? item.cupertinoSelectedIcon : item.cupertinoIcon,
+                    key: ValueKey(selected),
+                    color: color,
+                    size: 21,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 220),
+                  curve: Curves.easeOut,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: selected ? 10 : 9,
+                    height: 1,
+                    fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                  ),
+                  child: Text(
+                    item.label,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// NAVIGATION MODEL
+// ============================================================================
+
+class _NavItemData {
+  const _NavItemData({
+    required this.label,
+    required this.materialIcon,
+    required this.materialSelectedIcon,
+    required this.cupertinoIcon,
+    required this.cupertinoSelectedIcon,
+  });
+
+  final String label;
+
+  final IconData materialIcon;
+  final IconData materialSelectedIcon;
+
+  final IconData cupertinoIcon;
+  final IconData cupertinoSelectedIcon;
+}

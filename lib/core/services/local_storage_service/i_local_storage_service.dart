@@ -1,8 +1,7 @@
-
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 
-import 'local_storage_service.dart';
+import 'package:stock_control_master/core/services/local_storage_service/local_storage_service.dart';
 
 class ILocalStorageService extends LocalStorageService {
   @override
@@ -21,10 +20,11 @@ class ILocalStorageService extends LocalStorageService {
   }
 
   @override
-  Future read(
-      {required String boxName,
-      required String key,
-      dynamic defaultValue}) async {
+  Future read({
+    required String boxName,
+    required String key,
+    dynamic defaultValue,
+  }) async {
     try {
       var box = await Hive.openBox(boxName);
       return box.get(key, defaultValue: defaultValue);
@@ -35,8 +35,11 @@ class ILocalStorageService extends LocalStorageService {
   }
 
   @override
-  Future<void> write(
-      {required String boxName, required String key, value}) async {
+  Future<void> write({
+    required String boxName,
+    required String key,
+    value,
+  }) async {
     var box = await Hive.openBox(boxName);
     return box.put(key, value);
   }

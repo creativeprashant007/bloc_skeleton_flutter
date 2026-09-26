@@ -1,4 +1,4 @@
-import 'today_shift_data.dart';
+import 'package:stock_control_master/features/home/domain/entities/today_shift_data.dart';
 
 class TodayShiftResponse {
   final bool success;

@@ -13,11 +13,7 @@ class OnboardingState extends Equatable {
 
   bool get isLastPage => pageIndex == totalPages - 1;
 
-  OnboardingState copyWith({
-    int? pageIndex,
-    int? totalPages,
-    bool? completed,
-  }) {
+  OnboardingState copyWith({int? pageIndex, int? totalPages, bool? completed}) {
     return OnboardingState(
       pageIndex: pageIndex ?? this.pageIndex,
       totalPages: totalPages ?? this.totalPages,

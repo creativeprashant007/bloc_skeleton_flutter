@@ -13,8 +13,8 @@ import 'package:stock_control_master/core/services/network_service/auth_intercep
 
 import 'package:logger/logger.dart';
 
-import 'network_service.dart';
-import 'network_logger.dart';
+import 'package:stock_control_master/core/services/network_service/network_service.dart';
+import 'package:stock_control_master/core/services/network_service/network_logger.dart';
 
 class INetworkService extends NetworkService {
   Dio _dio = Dio();

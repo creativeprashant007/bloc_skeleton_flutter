@@ -6,22 +6,20 @@ import 'package:stock_control_master/features/account/presentation/view/add_user
 import 'package:stock_control_master/features/account/presentation/view/account_page.dart'
     show AccountPage;
 
-import 'package:stock_control_master/features/auth/presentation/enter_otp/bloc/enter_otp_bloc.dart'
+import 'package:stock_control_master/features/auth/presentation/bloc/enter_otp/enter_otp_bloc.dart'
     show EnterOtpBloc;
-import 'package:stock_control_master/features/auth/presentation/enter_otp/enter_otp_screen.dart'
+import 'package:stock_control_master/features/auth/presentation/view/enter_otp_screen.dart'
     show EnterOtpScreen;
 
-import 'package:stock_control_master/features/auth/presentation/sign_in/bloc/sign_in_bloc.dart'
+import 'package:stock_control_master/features/auth/presentation/bloc/sign_in/sign_in_bloc.dart'
     show SignInBloc;
-import 'package:stock_control_master/features/auth/presentation/sign_in/sign_in_screen.dart'
+import 'package:stock_control_master/features/auth/presentation/view/sign_in_screen.dart'
     show SignInScreen;
 
-import 'package:stock_control_master/features/auth/presentation/sign_up/bloc/sign_up_bloc.dart'
+import 'package:stock_control_master/features/auth/presentation/bloc/sign_up/sign_up_bloc.dart'
     show SignUpBloc;
-import 'package:stock_control_master/features/auth/presentation/sign_up/sign_up_screen.dart'
+import 'package:stock_control_master/features/auth/presentation/view/sign_up_screen.dart'
     show SignUpScreen;
-
-import 'package:stock_control_master/features/home/presentation/home/bloc/home_bloc.dart';
 
 import 'package:stock_control_master/features/index/presentation/view/index_screen.dart'
     show IndexScreen;

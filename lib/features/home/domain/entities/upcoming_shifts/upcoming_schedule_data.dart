@@ -1,6 +1,7 @@
-import 'upcoming_filter.dart';
-import 'upcoming_pagination.dart' show UpcomingPagination;
-import 'upcoming_shift.dart';
+import 'package:stock_control_master/features/home/domain/entities/upcoming_shifts/upcoming_filter.dart';
+import 'package:stock_control_master/features/home/domain/entities/upcoming_shifts/upcoming_pagination.dart'
+    show UpcomingPagination;
+import 'package:stock_control_master/features/home/domain/entities/upcoming_shifts/upcoming_shift.dart';
 
 class UpcomingScheduleData {
   final List<UpcomingShift> upcomingSchedule;

@@ -35,14 +35,14 @@ import 'package:stock_control_master/features/auth/data/services/google_auth_ser
     show GoogleAuthService;
 import 'package:stock_control_master/core/configs/service/storage_service.dart';
 import 'package:stock_control_master/core/locator.dart';
-import 'package:stock_control_master/shared/widgets/dialogs/loading_dialog.dart';
-import 'package:stock_control_master/features/auth/presentation/sign_in/sign_in_screen.dart';
+import 'package:stock_control_master/shared/widgets/organisms/loading_dialog.dart';
+import 'package:stock_control_master/features/auth/presentation/view/sign_in_screen.dart';
 import 'package:stock_control_master/core/services/dialog_and_sheet_service/dialog_and_sheet_service.dart';
 import 'package:stock_control_master/core/services/navigation_service/navigation_service.dart';
 
 import 'package:stock_control_master/core/constants/app_assets.dart';
-import 'account_event.dart';
-import 'account_state.dart';
+import 'package:stock_control_master/features/account/presentation/bloc/account_event.dart';
+import 'package:stock_control_master/features/account/presentation/bloc/account_state.dart';
 
 class AccountBloc extends Bloc<AccountEvent, AccountState> {
   AccountBloc({

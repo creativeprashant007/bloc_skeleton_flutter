@@ -1,4 +1,4 @@
-import 'upcoming_schedule_data.dart';
+import 'package:stock_control_master/features/home/domain/entities/upcoming_shifts/upcoming_schedule_data.dart';
 
 class UpcomingScheduleResponse {
   final bool success;

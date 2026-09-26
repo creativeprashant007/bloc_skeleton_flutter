@@ -1,4 +1,4 @@
-import 'today_shift_item.dart';
+import 'package:stock_control_master/features/home/domain/entities/today_shift_item.dart';
 
 class ActiveSessionEntity {
   final bool exists;

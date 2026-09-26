@@ -1,10 +1,10 @@
 import 'package:stock_control_master/features/home/domain/entities/team_mates/today_team_mates.dart'
     show TodayTeammate;
 import 'package:stock_control_master/features/home/domain/entities/today_shift_data.dart';
-import 'home_action_type.dart';
-import 'home_open_work_area_ui_model.dart';
-import 'home_shift_runtime_mode.dart';
-import 'shift_ui_model.dart';
+import 'package:stock_control_master/features/home/presentation/models/home_action_type.dart';
+import 'package:stock_control_master/features/home/presentation/models/home_open_work_area_ui_model.dart';
+import 'package:stock_control_master/features/home/presentation/models/home_shift_runtime_mode.dart';
+import 'package:stock_control_master/features/home/presentation/models/shift_ui_model.dart';
 
 class HomeUiMappedResult {
   final ShiftUiModel? todayShift;

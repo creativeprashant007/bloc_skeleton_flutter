@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stock_control_master/app_provider.dart';
-import 'package:stock_control_master/core/extension/build_extention.dart';
+import 'package:stock_control_master/core/extension/build_extension.dart';
 
 import 'package:stock_control_master/core/services/firebase/notification_service.dart'
     show NotificationService;
