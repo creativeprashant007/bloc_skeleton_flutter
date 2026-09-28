@@ -12,7 +12,8 @@ import 'package:stock_control_master/core/locator.dart';
 import 'package:stock_control_master/my_app.dart' show MyApp;
 import 'package:flutter/material.dart' show runApp, Colors;
 
-import 'firebase_options.dart' show DefaultFirebaseOptions;
+import 'package:stock_control_master/firebase_options.dart'
+    show DefaultFirebaseOptions;
 
 late StorageService storageService;
 

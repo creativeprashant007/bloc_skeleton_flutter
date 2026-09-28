@@ -9,11 +9,7 @@ class ApiResponse<T> extends Equatable {
   final String? message;
   final dynamic status;
 
-  const ApiResponse({
-    this.data,
-    this.message,
-    this.status,
-  });
+  const ApiResponse({this.data, this.message, this.status});
 
   bool get hasData => data != null;
 
@@ -120,5 +116,6 @@ class ApiResponse<T> extends Equatable {
   List<Object?> get props => [data, message, status];
 
   @override
-  String toString() => 'ApiResponse(status: $status, message: $message, data: $data)';
+  String toString() =>
+      'ApiResponse(status: $status, message: $message, data: $data)';
 }

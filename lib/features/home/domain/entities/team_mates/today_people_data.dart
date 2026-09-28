@@ -3,7 +3,8 @@ import 'package:stock_control_master/features/home/domain/entities/team_mates/to
 import 'package:stock_control_master/features/home/domain/entities/team_mates/today_team_mates.dart'
     show TodayTeammate;
 
-import 'today_people_pagination.dart' show TodayPeoplePagination;
+import 'package:stock_control_master/features/home/domain/entities/team_mates/today_people_pagination.dart'
+    show TodayPeoplePagination;
 
 class TodayPeopleData {
   final List<TodayTeammate> items;

@@ -16,8 +16,7 @@ class GoogleAuthService {
       throw Exception('Google sign-in was cancelled');
     }
 
-    final GoogleSignInAuthentication googleAuth =
-        googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
     final credential = GoogleAuthProvider.credential(
       idToken: googleAuth.idToken,

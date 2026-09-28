@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_control_master/core/extension/user_extension.dart';
-import 'package:stock_control_master/features/home/presentation/break/bloc/start_break_bloc.dart';
-import 'package:stock_control_master/features/home/presentation/break/bloc/start_break_event.dart';
-import 'package:stock_control_master/features/home/presentation/break/bloc/start_break_state.dart';
-import 'package:stock_control_master/features/home/presentation/break/view/start_break_bottom_sheet.dart';
-import 'package:stock_control_master/features/home/presentation/home/bloc/home_bloc.dart';
-import 'package:stock_control_master/features/home/presentation/home/bloc/home_event.dart';
-import 'package:stock_control_master/features/home/presentation/home/bloc/home_state.dart';
+import 'package:stock_control_master/features/home/presentation/bloc/start_break/start_break_bloc.dart';
+import 'package:stock_control_master/features/home/presentation/bloc/start_break/start_break_event.dart';
+import 'package:stock_control_master/features/home/presentation/bloc/start_break/start_break_state.dart';
+import 'package:stock_control_master/features/home/presentation/view/start_break_bottom_sheet.dart';
+import 'package:stock_control_master/features/home/presentation/bloc/home/home_bloc.dart';
+import 'package:stock_control_master/features/home/presentation/bloc/home/home_event.dart';
+import 'package:stock_control_master/features/home/presentation/bloc/home/home_state.dart';
 import 'package:stock_control_master/features/home/presentation/models/home_action_type.dart';
-import 'package:stock_control_master/shared/widgets/molecules/open_shift_area_sheet.dart';
-import 'package:stock_control_master/shared/widgets/molecules/shift_action_confirmation_sheet.dart';
-import 'package:stock_control_master/shared/widgets/organisms/work_location_picker_widgets.dart';
+import 'package:stock_control_master/features/home/presentation/widgets/open_shift_area_sheet.dart';
+import 'package:stock_control_master/features/home/presentation/widgets/shift_action_confirmation_sheet.dart';
+import 'package:stock_control_master/features/home/presentation/widgets/work_location_picker_widgets.dart';
 
 String _roleLabel(BuildContext context) {
   final user = context.currentUser;

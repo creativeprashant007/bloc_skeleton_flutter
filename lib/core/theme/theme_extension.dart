@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_theme_colors.dart';
+import 'package:stock_control_master/core/theme/app_theme_colors.dart';
 
 extension ThemeX on BuildContext {
   ThemeData get theme => Theme.of(this);

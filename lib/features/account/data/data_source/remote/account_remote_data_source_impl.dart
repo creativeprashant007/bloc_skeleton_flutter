@@ -14,7 +14,8 @@ import 'package:stock_control_master/core/services/network_service/network_servi
 import 'package:stock_control_master/shared/failure.dart';
 import 'package:stock_control_master/features/account/domain/params/resend_invitations_params.dart'
     show ResendInvitationParams;
-import 'account_remote_data_source.dart' show AccountRemoteDataSource;
+import 'package:stock_control_master/features/account/data/data_source/remote/account_remote_data_source.dart'
+    show AccountRemoteDataSource;
 
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource {
   final NetworkService _networkService = locator<NetworkService>();

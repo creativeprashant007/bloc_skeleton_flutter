@@ -13,7 +13,7 @@ import 'package:stock_control_master/features/account/presentation/bloc/account_
 import 'package:stock_control_master/features/account/presentation/bloc/account_state.dart';
 
 import 'package:stock_control_master/features/index/presentation/view/index_screen.dart';
-import 'features/splash/presentation/splash_screen.dart.dart';
+import 'package:stock_control_master/features/splash/presentation/view/splash_screen.dart';
 
 class AppView extends StatelessWidget {
   const AppView({super.key});

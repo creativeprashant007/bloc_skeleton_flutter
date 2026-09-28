@@ -8,9 +8,9 @@ import 'package:stock_control_master/features/account/presentation/bloc/account_
 import 'package:stock_control_master/features/account/presentation/bloc/account_event.dart'
     show ClearAccountMessage, LoadPendingInvitations, SendInvitePressed;
 import 'package:stock_control_master/features/account/presentation/bloc/account_state.dart';
-import 'package:stock_control_master/shared/widgets/atoms/add_employee_button.dart';
-import 'package:stock_control_master/shared/widgets/atoms/invite_employee_bottom_sheet.dart';
-import 'package:stock_control_master/shared/widgets/atoms/pending_invitations_section.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/add_employee_button.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/invite_employee_bottom_sheet.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/pending_invitations_section.dart';
 
 class AddPeoplePage extends StatefulWidget {
   const AddPeoplePage({super.key});

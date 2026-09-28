@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
-import 'configs/service/storage_service.dart' show StorageService;
+import 'package:stock_control_master/core/configs/service/storage_service.dart'
+    show StorageService;
 
 // ============================================================================
 // CORE SERVICES
@@ -85,7 +86,7 @@ import 'package:stock_control_master/features/home/domain/usecases/start_schedul
 
 import 'package:stock_control_master/features/home/domain/usecases/switch_location_usecase.dart'
     show SwitchLocationUseCase;
-import 'package:stock_control_master/features/home/domain/usecases/work_areas_usecase.dart.dart'
+import 'package:stock_control_master/features/home/domain/usecases/work_areas_usecase.dart'
     show WorkAreasUsecase;
 
 // ============================================================================

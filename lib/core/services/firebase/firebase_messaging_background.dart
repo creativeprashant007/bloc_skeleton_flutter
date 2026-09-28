@@ -2,8 +2,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-import 'notification_service.dart' show NotificationService;
-
+import 'package:stock_control_master/core/services/firebase/notification_service.dart'
+    show NotificationService;
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {

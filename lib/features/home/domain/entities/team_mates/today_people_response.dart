@@ -1,4 +1,5 @@
-import 'today_people_data.dart' show TodayPeopleData;
+import 'package:stock_control_master/features/home/domain/entities/team_mates/today_people_data.dart'
+    show TodayPeopleData;
 
 class TodayPeopleResponse {
   final bool success;

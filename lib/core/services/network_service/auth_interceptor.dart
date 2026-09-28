@@ -5,9 +5,9 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:stock_control_master/core/locator.dart' show locator;
-import 'package:stock_control_master/features/auth/presentation/sign_in/sign_in_screen.dart'
+import 'package:stock_control_master/features/auth/presentation/view/sign_in_screen.dart'
     show SignInScreen;
-import 'package:stock_control_master/shared/widgets/dialogs/info_dialog.dart'
+import 'package:stock_control_master/shared/widgets/organisms/info_dialog.dart'
     show InfoDialog;
 import 'package:stock_control_master/core/services/dialog_and_sheet_service/dialog_and_sheet_service.dart'
     show DialogAndSheetService;

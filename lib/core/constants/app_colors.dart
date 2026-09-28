@@ -6,7 +6,7 @@ class AppColors {
   // ========================
   // LIGHT THEME
   // ========================
-  static const Color lightPrimary = Color.fromARGB(255, 21, 167, 135);
+  static const Color lightPrimary = Color.fromARGB(255, 5, 50, 40);
   static const Color lightSecondary = Color(0xFF16384A);
 
   static const Color lightBackground = Color(0xFFF8FBFD);
@@ -24,7 +24,9 @@ class AppColors {
   // ========================
   // DARK THEME
   // ========================
-  static const Color darkPrimary = Color(0xFF27EFC4); // keep SAME as light (important)
+  static const Color darkPrimary = Color(
+    0xFF27EFC4,
+  ); // keep SAME as light (important)
   static const Color darkSecondary = Color(0xFF16384A);
 
   static const Color darkBackground = Color(0xFF04111B);

@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'hrmaster-app-2026.firebasestorage.app',
     iosBundleId: 'com.hrmaster.app',
   );
-
 }

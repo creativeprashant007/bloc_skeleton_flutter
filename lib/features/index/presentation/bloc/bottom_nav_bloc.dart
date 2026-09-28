@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_control_master/features/index/domain/usecase/notification_count_usecase.dart'
     show NotificationCountUseCase;
 
-import 'bottom_nav_event.dart';
-import 'bottom_nav_state.dart';
+import 'package:stock_control_master/features/index/presentation/bloc/bottom_nav_event.dart';
+import 'package:stock_control_master/features/index/presentation/bloc/bottom_nav_state.dart';
 
 class BottomNavBloc extends Bloc<BottomNavEvent, BottomNavState> {
   BottomNavBloc({NotificationCountUseCase? notificationCountUseCase})

@@ -18,11 +18,13 @@ class NetworkLoggerInterceptor implements Interceptor {
     final data = options.data is FormData
         ? (options.data as FormData).files + (options.data as FormData).files
         : options.data ?? options.queryParameters;
-    _logger.d('>>>METHOD: ${options.method}\n'
-        '>>>ENDPOINT: ${options.uri}\n'
-        // log('HEADERS: ' + options.headers.toString());
-        '>>>DATA: ${data.toString()}\n'
-        '>>>QUERY_PARAMETERS: ${options.queryParameters}');
+    _logger.d(
+      '>>>METHOD: ${options.method}\n'
+      '>>>ENDPOINT: ${options.uri}\n'
+      // log('HEADERS: ' + options.headers.toString());
+      '>>>DATA: ${data.toString()}\n'
+      '>>>QUERY_PARAMETERS: ${options.queryParameters}',
+    );
     handler.next(options);
   }
 

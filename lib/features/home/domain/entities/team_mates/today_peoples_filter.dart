@@ -4,8 +4,6 @@ class TodayPeopleFilters {
   const TodayPeopleFilters({required this.date});
 
   factory TodayPeopleFilters.fromJson(Map<String, dynamic> json) {
-    return TodayPeopleFilters(
-      date: json['date'] ?? '',
-    );
+    return TodayPeopleFilters(date: json['date'] ?? '');
   }
 }

@@ -1,21 +1,21 @@
 import 'dart:io' show Platform;
 
-import 'package:stock_control_master/shared/widgets/atoms/app_version_and_update_card.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/app_version_and_update_card.dart';
 
-import 'package:stock_control_master/shared/widgets/dialogs/alert_dialog.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:stock_control_master/shared/widgets/atoms/account_simple_tile.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/account_simple_tile.dart';
 import 'package:stock_control_master/features/account/presentation/bloc/account_bloc.dart';
 import 'package:stock_control_master/features/account/presentation/bloc/account_event.dart';
 import 'package:stock_control_master/features/account/presentation/bloc/account_state.dart';
-import 'package:stock_control_master/shared/widgets/atoms/account_company_card.dart';
-import 'package:stock_control_master/shared/widgets/atoms/account_header.dart';
-import 'package:stock_control_master/shared/widgets/atoms/account_profile_tile.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/account_company_card.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/account_header.dart';
+import 'package:stock_control_master/features/account/presentation/widgets/account_profile_tile.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});

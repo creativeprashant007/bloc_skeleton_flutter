@@ -3,13 +3,13 @@ import 'package:stock_control_master/core/constants/app_colors.dart'
     show AppColors;
 import 'package:stock_control_master/core/theme/app_elevated_button_theme.dart';
 import 'package:stock_control_master/core/theme/app_outlined_button_theme.dart';
-import 'app_app_bar_theme.dart';
-import 'app_card_theme.dart';
-import 'app_check_box_theme.dart';
-import 'app_input_decoration_theme.dart';
-import 'app_switch_theme.dart';
-import 'app_text_theme.dart';
-import 'app_theme_colors.dart';
+import 'package:stock_control_master/core/theme/app_app_bar_theme.dart';
+import 'package:stock_control_master/core/theme/app_card_theme.dart';
+import 'package:stock_control_master/core/theme/app_check_box_theme.dart';
+import 'package:stock_control_master/core/theme/app_input_decoration_theme.dart';
+import 'package:stock_control_master/core/theme/app_switch_theme.dart';
+import 'package:stock_control_master/core/theme/app_text_theme.dart';
+import 'package:stock_control_master/core/theme/app_theme_colors.dart';
 
 class AppTheme {
   AppTheme._();

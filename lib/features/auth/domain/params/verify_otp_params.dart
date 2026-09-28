@@ -5,9 +5,6 @@ class VerifyOtpParams {
   VerifyOtpParams({required this.otp, required this.email});
 
   Map<String, dynamic> toJson() {
-    return {
-      "otp": otp,
-      "email": email,
-    };
+    return {"otp": otp, "email": email};
   }
 }
