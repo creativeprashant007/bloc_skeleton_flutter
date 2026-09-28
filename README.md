@@ -1,17 +1,34 @@
-# stock_control_master
+# Stock Control Master
 
-A new Flutter project.
+Stock Control Master is a Flutter application skeleton prepared for the development of a stock and inventory management system.
 
-## Getting Started
+The application will support:
 
-This project is a starting point for a Flutter application.
+- Android
+- iOS
+- Android tablets
+- iPad
 
-A few resources to get you started if this is your first Flutter project:
+## Project Status
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+This repository currently contains the initial Flutter project skeleton.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Application features and business modules have not yet been implemented.
+
+## Architecture
+
+The project will follow Clean Architecture using Flutter BLoC.
+
+The main layers will be:
+
+```text
+lib/
+├── core/
+├── features/
+│   ├── account/
+│   ├── auth/
+│   ├── home/
+│   ├── index/
+│   └── splash/
+├── shared/
+└── main.dart
